@@ -18,8 +18,8 @@ import java.util.List;
  * Soci&eacute;t&eacute; : Seb Informatique
  *
  * @author S&eacute;bastien Duch&eacute;
- * @version 1.8
- * @since 22/12/22
+ * @version 1.9
+ * @since 15/01/23
  */
 public class MyTabbedPane extends JTabbedPane {
 
@@ -52,6 +52,19 @@ public class MyTabbedPane extends JTabbedPane {
                     setSelectedComponent(component);
                 } catch (IllegalArgumentException e) {
                     addTab(title, icon, component);
+                }
+            }
+        }.execute();
+    }
+
+    public void selectOrAddTab(Component component, String title, Icon icon, boolean withCloseButton) {
+        new MySwingWorker() {
+            @Override
+            protected void done() {
+                try {
+                    setSelectedComponent(component);
+                } catch (IllegalArgumentException e) {
+                    addTab(title, icon, component, withCloseButton);
                 }
             }
         }.execute();
