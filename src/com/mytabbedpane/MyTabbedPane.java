@@ -10,6 +10,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Titre : MyTabbedPane
@@ -139,7 +140,7 @@ public class MyTabbedPane extends JTabbedPane {
             return;
         }
         super.removeTabAt(index);
-        final List<TabLabel> tabLabels = TAB_LABELS.stream().filter(tabLabel -> tabLabel.getIndex() == index).toList();
+        final List<TabLabel> tabLabels = TAB_LABELS.stream().filter(tabLabel -> tabLabel.getIndex() == index).collect(Collectors.toList());
         TAB_LABELS.removeAll(tabLabels);
         TAB_LABELS.stream().filter(tabLabel -> tabLabel.getIndex() > index).forEach(TabLabel::decrementIndex);
     }
